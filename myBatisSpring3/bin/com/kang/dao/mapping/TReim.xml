@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kang.dao.ItreimDAO">
+		
+		<resultMap id="treimMap" type="treim">
+			<id property="rmid" column="rmid"></id>
+			<result property="rmname" column="rmname"></result>
+			<result property="rmdesc" column="rmdesc"></result>
+			<result property="rmdate" column="rmdate"></result>
+			<association property="sysUsers" javaType="sysUsers">
+				<id property="usrid" column="usrid"></id>
+				<result property="usrname" column="usrname"></result>
+				<result property="usrpwd" column="usrpwd"></result>
+				<result property="usrtype" column="usrtype"></result>
+				<result property="usrmgr" column="usrmgr"></result>
+			</association>
+		</resultMap>		
+		<select id="findById" parameterType="int" resultMap="treimMap">
+			select 
+				  t.rmid ,t.rmname,u.usrid, u.usrname
+			from  sys_users as u,t_reim as t
+			where u.usrid = t.usrid
+			and   t.rmid = #{rmid}
+		</select>
+	
+	
+		<resultMap id="treimMapWithLeftJoin" type="treim">
+			<id property="rmid" column="rmid"></id>
+			<result property="rmname" column="rmname"></result>
+			<result property="rmdesc" column="rmdesc"></result>
+			<result property="rmdate" column="rmdate"></result>
+				<association column="usrid"   property="sysUsers" javaType="sysUsers" resultMap="userWithLeftJoin">
+				</association>
+		</resultMap>
+		<resultMap id="userWithLeftJoin" type="sysUsers">
+			<id property="usrid" column="usrid"></id>
+			<result property="usrname" column="usrname"></result>
+			<result property="usrpwd" column="usrpwd"></result>
+			 <result property="usrtype" column="usrtype"></result>
+			<result property="usrmgr" column="usrmgr"></result>
+		</resultMap>
+		
+		<select id="findByIdWithLeftJoin" parameterType="int" resultMap="treimMapWithLeftJoin">
+			select 
+				  t.rmid ,t.rmname,u.usrid, u.usrname
+			from t_reim as t  left join  sys_users as u
+			on t.usrid  = u.usrid
+			where   t.rmid = #{rmid}
+		</select>
+		
+		<!-- 这里必须查询 t.usrid -->
+		<select id="selectTreimForOne" parameterType="int" resultMap="selectTreimForOneMap">
+			select t.rmid ,t.rmname,t.usrid from t_reim as t where t.rmid = #{rmid}
+		</select>
+		
+		<select id="selectUsrForOne" parameterType="int" resultMap="selectUsrForOneMap">
+			select u.usrid, u.usrname from sys_users as u where u.usrid = #{usrid}
+		</select>
+		
+		<resultMap id="selectTreimForOneMap" type="treim">
+			<id property="rmid" column="rmid"></id>
+			<result property="rmname" column="rmname"></result>
+			<result property="rmdesc" column="rmdesc"></result>
+			<result property="rmdate" column="rmdate"></result>
+			<association column="usrid"   property="sysUsers"
+					 javaType="sysUsers" select="selectUsrForOne">
+			</association>
+		</resultMap>
+		
+		<resultMap id="selectUsrForOneMap" type="sysUsers">
+			<id property="usrid" column="usrid"></id>
+			<result property="usrname" column="usrname"></result>
+			<result property="usrpwd" column="usrpwd"></result>
+			 <result property="usrtype" column="usrtype"></result>
+			<result property="usrmgr" column="usrmgr"></result>
+		</resultMap>
+		
+		
+		<insert id="addTReim" parameterType="treim"
+				useGeneratedKeys="true" keyProperty="rmid">
+			insert into t_reim(rmname,rmdesc,usrid) 
+				values(#{rmname},#{rmdesc},#{sysUsers.usrid})
+		</insert>
+		<!--  
+		<select id="findWithOneToMany" parameterType="int" resultMap="treimOneToMany">
+			select 
+				  t.rmid ,t.rmname,u.usrid, u.usrname
+			from  sys_users as u,t_reim as t
+			where u.usrid = t.usrid
+			and   t.rmid = #{rmid}
+		</select>-->
+		<resultMap id="treimOneToMany" type="treim">
+			<id property="rmid" column="rmid"></id>
+			<result property="rmname" column="rmname"></result>
+			<result property="rmdesc" column="rmdesc"></result>
+			<result property="rmdate" column="rmdate"></result>
+			<association   property="sysUsers"
+					 resultMap="com.kang.dao.IsysUsersDAO.sysUsersWithOneToMany">
+			</association>
+		</resultMap>
+		
+		
+
+</mapper>

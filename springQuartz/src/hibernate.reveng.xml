@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="myUsr"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="store_Plu_link"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="store_bra_link"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="supArea"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="supBrand"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="supPlu"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="supStore"/>
+  <table-filter match-catalog="supCRM" match-schema="dbo" match-name="usr_area_brand_link"/>
+</hibernate-reverse-engineering>

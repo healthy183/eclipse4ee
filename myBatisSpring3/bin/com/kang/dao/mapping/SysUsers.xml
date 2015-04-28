@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kang.dao.IsysUsersDAO">
+	<select id="findById" resultType="sysUsers" parameterType="int">
+			select 
+			usrid 	usrid,
+			usrname	usrname,
+			usrpwd	usrpwd,
+			usrtype	usrtype,
+			usrmgr	usrmgr
+			from sys_users
+			where usrid = #{usrid}	
+	</select>
+	
+	<resultMap type="sysUsers" id="sysUsersMap">
+		<id property="usrid" column="usrid"></id>
+		<result property="usrname" column="usrname"></result>
+		<result property="usrpwd" column="usrpwd"></result>
+		<result property="usrtype" column="usrtype"></result>
+		<result property="usrmgr" column="usrmgr"></result>
+	</resultMap>
+	
+	<select id="getById" parameterType="int"
+			 resultType="sysUsers" resultMap="sysUsersMap">
+		select 
+			usrid,
+			usrname,
+			usrpwd,
+			usrtype,
+			usrmgr
+			from sys_users
+		where usrid = #{usrid}
+	</select>
+	
+	<select id="findAll" resultType="sysUsers" resultMap="sysUsersMap">
+	select * from sys_users
+	</select>
+	<!-- 主键自增  useGeneratedKeys="true"-->
+	<insert id="insertUsr" parameterType="sysUsers"
+		useGeneratedKeys="true" keyProperty="usrid">
+			insert into sys_users(usrname,usrpwd,usrtype,usrmgr)
+				values(#{usrname},#{usrpwd},#{usrtype},#{usrmgr})
+	</insert>
+	
+	<update id="updtUsr" parameterType="sysUsers">
+		update sys_users set usrpwd = #{usrpwd}
+			where usrname = #{usrname}
+	</update>
+	
+	<delete id="deleteUsr" parameterType="int">
+		delete from sys_users where usrid = #{usrid}
+	</delete>
+	
+	<!-- 为什么不行? -->
+	<select id="findWithOneToMany" parameterType="int" resultMap="sysUsersWithOneToMany">
+			select 
+				  t.rmid ,t.rmname,u.usrid, u.usrname
+			from  sys_users as u,t_reim as t
+			where u.usrid = t.usrid
+			and  u.usrid = #{usrid}
+		</select>
+	
+	<resultMap id="sysUsersWithOneToMany" type="sysUsers">
+		<id property="usrid" column="usrid"></id>
+		<result property="usrname" column="usrname"></result>
+		<result property="usrpwd" column="usrpwd"></result>
+		<result property="usrtype" column="usrtype"></result>
+		<result property="usrmgr" column="usrmgr"></result>
+		<collection property="treimSet"
+		resultMap="com.kang.dao.ItreimDAO.treimOneToMany">
+		</collection>
+	</resultMap>
+	
+</mapper>

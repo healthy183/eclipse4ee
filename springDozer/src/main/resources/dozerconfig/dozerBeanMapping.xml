@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://dozer.sourceforge.net
+      http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	  
+	  <configuration>
+		<stop-on-errors>true</stop-on-errors>
+		<date-format>yyyy-MM-dd</date-format>
+		<wildcard>true</wildcard>
+		<custom-converters> 
+			<converter type="main.java.com.jasson.util.EnumConverter">
+				<class-a>java.lang.Enum</class-a>
+				<class-b>java.lang.Integer</class-b>
+			</converter>
+		</custom-converters>
+	  </configuration>
+
+      <mapping date-format="yyyy/MM/dd">
+      	<class-a>main.java.com.jasson.mode.User</class-a>
+      	<class-b>main.java.com.jasson.mode.UserVO</class-b>
+		<field>
+			<a>name</a>
+			<b>userName</b>
+		</field>
+      	<field>
+			<a>info.createDate</a>
+			<b>info.date</b>
+		</field>
+		<field custom-converter="main.java.com.jasson.util.EnumConverter">
+			<a>info.gender</a>
+			<b>info.gender</b>
+		</field>
+		<!--
+		<field custom-converter="main.java.com.jasson.util.SpecialConverter">
+			<a>option</a>
+			<b>option</b>
+		</field>  -->
+      </mapping>
+</mappings>
+
+   

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="test" xmlns="http://jbpm.org/4.4/jpdl">
+   <start name="start1" g="293,23,48,48">
+      <transition name="to java1" to="java1" g="-51,-22"/>
+   </start>
+   <end name="end1" g="295,418,48,48"/>
+   <java name="java1" g="275,112,92,52" class="com.jbpm.test.Java4Test" method="methodOne">
+      <transition name="to task1" to="task1" g="-52,-22"/>
+   </java>
+   <task name="task1" g="276,203,92,52">
+      <transition name="to java2" to="java2" g="-51,-22"/>
+      <transition name="to java3" to="java3" g="21,-20"/>
+   </task>
+   <java name="java2" g="156,286,92,52" class="com.jbpm.test.Java4Test" method="methodTwo">
+      <transition name="to end1" to="end1" g="-62,-5"/>
+   </java>
+   <java name="java3" g="396,287,92,52" class="com.jbpm.test.Java4Test" method="methodThree">
+      <transition name="to end1" to="end1" g="23,-7"/>
+   </java>
+</process>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+
+    <!--配置mysql数据源-->
+    <persistence-unit name="mysql" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source>mysqlDataSource</non-jta-data-source>
+       <!--这里的class是指要储存于本数据库的Entity-->
+        <class>com.sunhope.model.core.ExternalEnvironment</class>  
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.archive.autodetection" value="false"/>
+            <property name="hibernate.transaction.auto_close_session" value="false"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+    </persistence-unit>
+    
+    <!--配置postgre数据源-->
+    <persistence-unit name="postgre" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source>postgreDataSource</non-jta-data-source>
+        <class>com.sunhope.model.baseinfo.BdStorageCompany</class>
+        <class>com.sunhope.model.baseinfo.BdHouseType</class>
+        <class>com.sunhope.model.baseinfo.BdStorage</class>
+        <class>com.sunhope.model.core.StoreEnvironment</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.archive.autodetection" value="false"/>
+            <property name="hibernate.transaction.auto_close_session" value="false"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+    </persistence-unit>
+    
+</persistence>
