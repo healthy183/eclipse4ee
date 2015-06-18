@@ -57,6 +57,13 @@
           p:sqlSessionFactory-ref="sqlSessionFactory"
           p:basePackage="com.kang.dao"/>
      
+     <!-- p:sqlSessionFactory-ref="sqlSessionFactory" is @Deprecated in  mybatis-spring-1.2.1.jar
+     	  pls using 
+     	     p:sqlSessionFactoryName="sqlSessionFactory"
+      -->
+     
+     
+     
      <!-- 注释式事务 -->
      <bean id="transactionManager" 
          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
