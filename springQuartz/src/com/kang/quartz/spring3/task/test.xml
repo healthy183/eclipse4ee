@@ -17,7 +17,11 @@
 	   
 	<context:component-scan base-package="com.kang.quartz.spring3.task" /><!--需要扫描的包--> 
    	<context:annotation-config /><!--开启注解--> 
-    <task:annotation-driven/> <!-- 这句是重点 定时器开关-->
+    
+    <task:executor id="executor" pool-size="1" />
+	<task:scheduler id="scheduler" pool-size="1" />
+    <task:annotation-driven executor="executor"
+		scheduler="scheduler" /> <!-- 这句是重点 定时器开关-->
 	   
 	   
 	   

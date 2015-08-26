@@ -9,7 +9,6 @@ public class TaskTest {
 	 */
 	public static void main(String[] args) {
 		
-		
 		new ClassPathXmlApplicationContext("com/kang/quartz/spring3/task/test.xml");
 	}
 
