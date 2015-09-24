@@ -61,16 +61,44 @@
 			where u.usrid = t.usrid
 			and  u.usrid = #{usrid}
 		</select>
+		
+		<!-- usrid 	usrid, -->
+		<select id="findByPageObj" parameterType="com.kang.util.Page" resultMap="sysUsersWithOneToMany">
+			select 
+			
+			usrname	usrname,
+			usrpwd	usrpwd,
+			usrtype	usrtype,
+			usrmgr	usrmgr
+			from sys_users
+			where  usrname = #{params.usrname}
+			order by usrId
+		</select>
+		
+		
+		
+		
+		<select id="findByBestPayPage" parameterType="com.kang.bestPay.util.SysUserRequest" resultMap="sysUsersWithOneToMany">
+			select 
+			usrname	usrname,
+			usrpwd	usrpwd,
+			usrtype	usrtype,
+			usrmgr	usrmgr
+			from sys_users
+			where usrname =  #{usrname}
+			order by usrId
+		</select>
+		
 	
 	<resultMap id="sysUsersWithOneToMany" type="sysUsers">
-		<id property="usrid" column="usrid"></id>
+		<!-- <id property="usrid" column="usrid"></id> -->
 		<result property="usrname" column="usrname"></result>
 		<result property="usrpwd" column="usrpwd"></result>
 		<result property="usrtype" column="usrtype"></result>
 		<result property="usrmgr" column="usrmgr"></result>
-		<collection property="treimSet"
+		<!-- <collection property="treimSet"
 		resultMap="com.kang.dao.ItreimDAO.treimOneToMany">
-		</collection>
+		</collection> -->
 	</resultMap>
 	
 </mapper>

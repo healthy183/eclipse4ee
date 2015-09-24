@@ -46,4 +46,21 @@
 		<typeAlias alias="sysRoles" type="com.kang.model.SysRoles" />
 		<typeAlias alias="usrRoleLink" type="com.kang.model.UsrRoleLink" />
 	</typeAliases>
+	
+	 <plugins>  
+       <plugin interceptor="com.kang.util.PageInterceptor">  
+           <property name="databaseType" value="mysql"/>  
+       </plugin>  
+           <plugin interceptor="com.kang.bestPay.util.QueryPageInterceptor">  
+       </plugin> 
+    </plugins>  
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </configuration>

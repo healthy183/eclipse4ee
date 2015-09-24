@@ -11,9 +11,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kang.bestPay.util.SysUserRequest;
 import com.kang.dao.IsysUsersDAO;
 import com.kang.model.SysUsers;
 import com.kang.service.IuserService;
+import com.kang.util.Page;
 
 @Scope("prototype")
 @Service("userServiceImpl")
@@ -25,6 +27,8 @@ public class UserServiceImpl implements IuserService {
 	
 	@Override
 	public SysUsers findById(int usrid){
+		Integer t;
+		
 		return sysUsersDAO.findById(usrid);
 	} 
 	
@@ -85,6 +89,16 @@ public class UserServiceImpl implements IuserService {
 		//iuserService.deleteUsr();
 		iuserService.findWithOneToMany();
 	}
+
+		@Override
+		public List<SysUsers>  findByPage(Page page) {
+			return sysUsersDAO.findByPageObj(page);
+		}
+
+		@Override
+		public List<SysUsers> findByBestPayPage(SysUserRequest request) {
+			return sysUsersDAO.findByBestPayPage(request);
+		}
 
 		
 

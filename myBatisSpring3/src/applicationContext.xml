@@ -29,7 +29,7 @@
 			value="jdbc:mysql://127.0.0.1:3306/spring3hibernate4jbpm4?useunicode=true&amp;characterEncoding=utf8">
 		</property>
 		<property name="username" value="root"/>
-		<property name="password" value="123456"/>
+		<property name="password" value="Qq123456"/>
 	</bean>
 	
 	<bean id="sqlSessionFactory" 
