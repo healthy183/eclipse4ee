@@ -14,6 +14,7 @@ public class TaskExecutorService {
 		taskExecutor.setCorePoolSize(2);
 		taskExecutor.setQueueCapacity(1000);
 		taskExecutor.setMaxPoolSize(5);
+		taskExecutor.setKeepAliveSeconds(180);
 		//taskExecutor.afterPropertiesSet();
 		return taskExecutor;
 	}
